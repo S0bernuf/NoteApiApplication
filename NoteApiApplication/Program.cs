@@ -1,4 +1,8 @@
 
+using Jwt.Services;
+using NoteApplication.BussinesLogic;
+using NoteApplication.Database;
+
 namespace NoteApiApplication
 {
     public class Program
@@ -8,9 +12,12 @@ namespace NoteApiApplication
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+            builder.Services.AddDatabase(connectionString); // Add database service extension method
+            builder.Services.AddBusinessLogic(); // Add business logic services
+            builder.Services.AddScoped<IJwtService, JwtService>(); // Add JWT service
 
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
@@ -24,12 +31,9 @@ namespace NoteApiApplication
             }
 
             app.UseHttpsRedirection();
-
+            app.UseAuthentication();
             app.UseAuthorization();
-
-
             app.MapControllers();
-
             app.Run();
         }
     }

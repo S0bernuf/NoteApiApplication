@@ -1,16 +1,13 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-
-;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace NoteApplication.Database
 {
     public static class ServiceExtentions
     {
-        public static IServiceCollection AddDatabase(this IServiceCollection services, string connnectionString)
+        public static IServiceCollection AddDatabase(this IServiceCollection services, string connectionString)
         {
-            services.AddScoped<>();
-            services.AddDbContext<>(options => options.UseSqlServer(connnectionString));
-
+            services.AddDbContext<NoteDbContext>(options => options.UseSqlServer(connectionString));
             return services;
         }
     }

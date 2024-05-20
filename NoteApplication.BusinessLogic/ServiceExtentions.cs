@@ -1,6 +1,4 @@
-﻿
-
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 
 namespace NoteApplication.BussinesLogic
 {
@@ -8,7 +6,7 @@ namespace NoteApplication.BussinesLogic
     {
         public static IServiceCollection AddBusinessLogic(this IServiceCollection services)
         {
-            services.AddScoped<>();
+            // Register business logic services, such as repositories or managers
             return services;
         }
     }
