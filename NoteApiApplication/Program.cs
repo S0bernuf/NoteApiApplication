@@ -1,7 +1,9 @@
-
 using Jwt.Services;
+using NoteApplication.BusinessLogic.Services;
 using NoteApplication.BussinesLogic;
 using NoteApplication.Database;
+using NoteApplication.Database.Repositories;
+
 
 namespace NoteApiApplication
 {
@@ -12,10 +14,16 @@ namespace NoteApiApplication
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            var connectionString = builder.Configuration.GetConnectionString("Database");
-            builder.Services.AddDatabase(connectionString);
-            builder.Services.AddBusinessLogic();
-            builder.Services.AddScoped<IJwtService, JwtService>();
+            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+            builder.Services.AddDatabase(connectionString); // Add database service extension method
+            builder.Services.AddBusinessLogic(); // Add business logic services
+            builder.Services.AddScoped<IJwtService, JwtService>(); // Add JWT service
+            builder.Services.AddScoped<IUserService, UserService>();
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
+            builder.Services.AddScoped<ICategoryService, CategoryService>();
+            builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+            builder.Services.AddScoped<INoteService, NoteService>();
+            builder.Services.AddScoped<INoteRepository, NoteRepository>();
 
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
