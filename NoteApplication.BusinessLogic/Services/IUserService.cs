@@ -10,7 +10,6 @@ namespace NoteApplication.BusinessLogic.Services
 {
     public interface IUserService
     {
-        Task<ServiceResponse<User>> RegisterAsync(UserRegisterDto dto);
-        Task<ServiceResponse<User>> LoginAsync(UserLoginDto dto);
+
     }
 }
