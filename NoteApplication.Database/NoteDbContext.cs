@@ -21,7 +21,7 @@ namespace NoteApplication.Database
             // Configure Note-User relationship
             modelBuilder.Entity<Note>()
                 .HasOne(n => n.User)
-                .WithMany(u => u.Notes)
+                .WithMany()
                 .HasForeignKey(n => n.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
 
@@ -35,7 +35,7 @@ namespace NoteApplication.Database
             // Configure Category-User relationship
             modelBuilder.Entity<Category>()
                 .HasOne(c => c.User)
-                .WithMany(u => u.Categories)
+                .WithMany()
                 .HasForeignKey(c => c.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
 

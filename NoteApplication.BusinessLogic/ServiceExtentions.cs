@@ -1,13 +1,14 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using NoteApplication.BusinessLogic.Services;
 
 namespace NoteApplication.BussinesLogic
 {
     public static class ServiceExtentions
     {
-        public static IServiceCollection AddBusinessLogic(this IServiceCollection services)
+        public static void AddBusinessLogic(this IServiceCollection services)
         {
-            // Register business logic services, such as repositories or managers
-            return services;
+            services.AddScoped<ICategoryService, CategoryService>();
+
         }
     }
 }
